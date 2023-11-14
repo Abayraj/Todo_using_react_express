@@ -14,7 +14,7 @@ const todoList = [
         todo: "test1",
         isCompleted: false
     },
-    
+
 ];
 //we pass data using two way from front end qurey params|| body params use in post ect...
 //for giving data to save in backend we can use body params
@@ -27,7 +27,7 @@ app.get("/api/todo", (req, res) => {
 });
 app.post("/api/todo", (req, res) => {
     const { todo } = req.body;
-    console.log(todo,"todo data")
+    console.log(todo, "todo data")
     //important ! checking
     if (!("todo" in req.body)) {
         res.status(400).json({
@@ -59,7 +59,7 @@ app.put("/api/todo", (req, res) => {
         });
 
         return res.json(todoList);
-    }
+    };
     res.status(404).json({
         message: `item with id:${id} does not exist`
     });
@@ -68,6 +68,8 @@ app.put("/api/todo", (req, res) => {
 });
 app.delete("/api/todo", (req, res) => {
     const { id } = req.body;
+
+    console.log(id,"iddd")
     const todoIndex = todoList.findIndex((item) => item.id === id);
     console.log(todoIndex, "todo index")
     if (todoIndex !== -1) {
