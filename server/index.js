@@ -14,15 +14,20 @@ const todoList = [
         todo: "test1",
         isCompleted: false
     },
+    
 ];
+//we pass data using two way from front end qurey params|| body params use in post ect...
+//for giving data to save in backend we can use body params
+//another way is to filter range filter to get on product  app.get("/api/todo/:id",(req,res)=>{ req.params.id res.json(res.params.id)})
+
 
 
 app.get("/api/todo", (req, res) => {
-    res.status(404).json(todoList);
+    res.json(todoList);
 });
 app.post("/api/todo", (req, res) => {
     const { todo } = req.body;
-
+    console.log(todo,"todo data")
     //important ! checking
     if (!("todo" in req.body)) {
         res.status(400).json({
@@ -36,7 +41,7 @@ app.post("/api/todo", (req, res) => {
         todo: todo,
         isCompleted: false,
     };
-    console.log(todoItem,"todo item");
+    console.log(todoItem, "todo item");
 
     todoList.push(todoItem);
     console.log(todoList, "updated todoList"); // Add this line
@@ -45,7 +50,6 @@ app.post("/api/todo", (req, res) => {
 app.put("/api/todo", (req, res) => {
     const { id, todo, isCompleted } = req.body;
     const isExitst = todoList.find((data) => data.id === id);
-
     if (isExitst) {
         todoList.forEach((todoItem) => {
             if (todoItem.id === id) {
@@ -62,15 +66,15 @@ app.put("/api/todo", (req, res) => {
 
 
 });
-app.delete("/api/todo",(req,res)=>{
-    const {id} = req.body;
-    const todoIndex = todoList.findIndex((item)=> item.id===id);
-    console.log(todoIndex,"todo index")
-    if(todoIndex !== -1){
-        todoList.splice(todoIndex,1);
+app.delete("/api/todo", (req, res) => {
+    const { id } = req.body;
+    const todoIndex = todoList.findIndex((item) => item.id === id);
+    console.log(todoIndex, "todo index")
+    if (todoIndex !== -1) {
+        todoList.splice(todoIndex, 1);
         return res.json(todoList);
     }
-    res.status(404).json({message:"item dose not exists"});
+    res.status(404).json({ message: "item dose not exists" });
 });
 
 
