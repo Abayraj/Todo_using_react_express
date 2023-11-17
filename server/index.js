@@ -69,7 +69,7 @@ app.put("/api/todo", (req, res) => {
 app.delete("/api/todo", (req, res) => {
     const { id } = req.body;
 
-    console.log(id,"iddd")
+    console.log(id, "iddd")
     const todoIndex = todoList.findIndex((item) => item.id === id);
     console.log(todoIndex, "todo index")
     if (todoIndex !== -1) {

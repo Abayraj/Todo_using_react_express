@@ -93,24 +93,28 @@ export const Todo = () => {
     console.log(TodoItems, "todo item")
 
     return (
-        <div className='flex justify-center items-center bg-slate-500 h-screen w-full' >
-            <div>
+        <div className='flex justify-center items-center bg-slate-500 h-screen w-full'>
+            <div className=' bg-neutral-500 shadow-2xl p-6 rounded-lg overflow-y-auto h-[40rem]'>
                 <form method="post" onSubmit={handleAddTodo}>
-                    <input className='border pl-4' type="text" placeholder='enter todo' onChange={handleInputChange} value={searchTodo} />
-                    <button className='bg-gray-900 rounded text-white text-sm p-1 ml-2' type='submit'>add todo</button>
+                    <input className='border p-1 w-[18rem] mt-6' type="text" placeholder='enter todo' onChange={handleInputChange} value={searchTodo} />
+                    <button className='bg-gray-900 rounded text-white text-sm p-2 ml-2' type='submit'>add todo</button>
                 </form>
                 <ul>
                     {TodoItems.map((data) => (
                         <div key={data.id}>
-                            <li className='text-2xlfont m-4 text-2xl font-mono '>{data.todo}</li>
-                            <button className='bg-gray-900 rounded text-white text-sm p-1 ml-2' onClick={() => handleEdit(data.id, data.todo)}>edit</button>
-                            <button className='bg-gray-900 rounded text-white text-sm p-1 ml-2' onClick={() => handleDelete(data.id)}>delete</button>
+                            <li className='text-2xlfont m-4 text-2xl font-mono text-center'>{data.todo}</li>
+                            <div className='flex justify-center items-center'>
+                                <button className='bg-gray-900 rounded text-white text-sm p-2 ml-2' onClick={() => handleEdit(data.id, data.todo)}>edit</button>
+                                <button className='bg-gray-900 rounded text-white text-sm p-2 ml-2' onClick={() => handleDelete(data.id)}>delete</button>
+                            </div>
                             {editTodo === data.id &&
-                                <>
-                                    <input className='border pl-4'   type='text' key={data.id} value={editData} onChange={(event) => setEditData(event.target.value)} />
-                                    <button className='bg-gray-900 rounded text-white text-sm p-1 ml-2' onClick={updateTodo}>save</button>
-                                    <button  className='bg-gray-900 rounded text-white text-sm p-1 ml-2'onClick={cancelUpdate}>cancel</button>
-                                </>
+                                <div className='mt-6'>
+                                    <input className='border p-1 w-[18rem]' type='text' key={data.id} value={editData} onChange={(event) => setEditData(event.target.value)} />
+                                    <button className='bg-gray-900 rounded text-white text-sm p-2 ml-2' onClick={updateTodo}>save</button>
+                                    <button className='bg-gray-900 rounded text-white text-sm p-2 ml-2' onClick={cancelUpdate}>cancel</button>
+                                </div>
+
+
 
                             }
                         </div>
