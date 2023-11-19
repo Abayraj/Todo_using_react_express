@@ -1,7 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const { v4: uuidv4 } = require('uuid');
+const connectDb =  require("../server/config/db");
 
+connectDb();
 
 const app = express();
 app.use(express.json());
